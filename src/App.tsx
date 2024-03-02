@@ -2,13 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { SignInButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const { isLoading, isAuthenticated } = useConvexAuth();
+  
   return (
     <>
       <div>
+      {isAuthenticated ? "Logged in" : "Logged out or still loading"}
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -25,6 +29,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
+      <SignInButton mode="modal" />
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
